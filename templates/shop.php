@@ -53,7 +53,8 @@ try {
             $categoria,
             $propietario,
             $numLikes,
-            $precio
+            $precio,
+            $fecha
         );
 
         // Guardamos la imagen en la base de datos

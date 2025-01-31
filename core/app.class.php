@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../src/exceptions/AppException.php';
 require_once __DIR__ . '/../src/database/connection.class.php';
 
+
 class App
 {
     /**

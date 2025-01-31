@@ -6,6 +6,7 @@ require_once __DIR__ . "/../inicio.part.php";
 $formularioEnviado = !empty($mensaje) && empty($errores);
 ?>
 
+
 <body>
     <script src="../../public/js/agregarProducto.js" defer></script>
     <!-- Start Header -->
@@ -54,6 +55,7 @@ $formularioEnviado = !empty($mensaje) && empty($errores);
                         <input type="text" class="form-control" id="nombre" name="nombre" value="<?= $nombre ?>"
                             required>
                     </div>
+
                     <label class="col-sm-3 control-label" for="descripcion">Descripción</label>
                     <div class="col-sm-9">
                         <textarea class="form-control" name="descripcion" id="descripcion" rows="3"
@@ -80,6 +82,13 @@ $formularioEnviado = !empty($mensaje) && empty($errores);
                         El precio debe tener solo dos decimales.
                     </div>
 
+                    <!-- Campo de fecha -->
+                    <label class="col-sm-3 control-label" for="fecha">Fecha</label>
+                    <div class="col-sm-9">
+                        <input type="date" class="form-control" id="fecha" name="fecha" min="<?= date('Y-m-d'); ?>"
+                            value="<?= date('Y-m-d'); ?>" required>
+                    </div>
+
                     <div class="col-sm-offset-3 col-sm-9 pt-3 d-flex">
                         <button type="submit" class="btn btn-primary btn-lg" style="margin-right: 10px;">Enviar</button>
                         <button type="reset" class="btn btn-danger btn-lg" onclick="borrarFormulario()">Borrar</button>
@@ -89,7 +98,9 @@ $formularioEnviado = !empty($mensaje) && empty($errores);
         </div>
     </div>
 
+
     <script>
+
         <?php if ($formularioEnviado): ?>
             borrarFormulario();
         <?php endif; ?>
@@ -100,7 +111,6 @@ $formularioEnviado = !empty($mensaje) && empty($errores);
     require_once __DIR__ . "/../fin.part.php";
     ?>
     <!-- End Footer -->
-
 </body>
 
 </html>

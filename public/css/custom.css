@@ -26,3 +26,11 @@
 .nav-item {
     padding-bottom: 5px;
 }
+
+.limit-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    /* Limita a 3 líneas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

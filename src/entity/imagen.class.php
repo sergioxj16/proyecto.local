@@ -10,10 +10,8 @@ class Imagen implements IEntity
     private int $propietario;
     private int $numLikes;
     private float $precio;
-
-    const RUTA_IMAGENES_PORTFOLIO = '/public/imagesSubidas/index/portfolio/';
+    private string $fecha;
     const RUTA_IMAGENES_GALERIA = '../public/imagesSubidas/galeria/';
-    const RUTA_IMAGENES_CLIENTES = '/public/imagesSubidas/clients/';
 
     public function __construct(
         string $imagen = "",
@@ -22,7 +20,8 @@ class Imagen implements IEntity
         string $categoria = "",
         int $propietario = 0,
         int $numLikes = 0,
-        float $precio = 0
+        float $precio = 0,
+        string $fecha = ""
     ) {
         $this->id = null;
         $this->imagen = $imagen;
@@ -32,6 +31,7 @@ class Imagen implements IEntity
         $this->propietario = $propietario;
         $this->numLikes = $numLikes;
         $this->setPrecio($precio);
+        $this->fecha = $fecha ?? date('Y-m-d');
     }
 
     public function getId()
@@ -121,6 +121,17 @@ class Imagen implements IEntity
         return $this;
     }
 
+    public function getFecha(): string
+    {
+        return $this->fecha;
+    }
+
+    public function setFecha(string $fecha): Imagen
+    {
+        $this->fecha = $fecha;
+        return $this;
+    }
+
     public function __toString(): string
     {
         return $this->descripcion;
@@ -135,7 +146,8 @@ class Imagen implements IEntity
             'categoria' => $this->getCategoria(),
             'propietario' => $this->getPropietario(),
             'numLikes' => $this->getNumLikes(),
-            'precio' => $this->getPrecio()
+            'precio' => $this->getPrecio(),
+            'fecha' => $this->getFecha() 
         ];
     }
 }

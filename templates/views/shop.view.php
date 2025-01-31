@@ -36,9 +36,10 @@
                                     style="height: 200px; object-fit: cover;"
                                     alt="<?= htmlspecialchars($imagen->getNombre()) ?>">
 
-                                <div class="card-body">
+                                    <div class="card-body">
                                     <h5 class="card-title"><?= htmlspecialchars($imagen->getNombre()) ?></h5>
-                                    <p class="card-text text-muted"><?= htmlspecialchars($imagen->getDescripcion()) ?></p>
+                                    <p class="card-text limit-description"><?= htmlspecialchars($imagen->getDescripcion()) ?>
+                                    </p>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">
                                             <strong>Categoría:</strong> <?= htmlspecialchars($imagen->getCategoria()) ?>
@@ -51,6 +52,9 @@
                                         </li>
                                         <li class="list-group-item">
                                             <strong>Propietario:</strong> <?= htmlspecialchars($imagen->getPropietario()) ?>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Fecha:</strong> <?= htmlspecialchars($imagen->getFecha()) ?>
                                         </li>
                                     </ul>
                                 </div>

@@ -9,6 +9,17 @@ require_once __DIR__ . '/../src/entity/imagen.class.php';
 require_once __DIR__ . '/../src/database/connection.class.php';
 require_once __DIR__ . '/../src/repository/imagenesRepository.php';
 
+// Definir la función para resetear las variables
+function resetearVariables() {
+    global $nombre, $descripcion, $categoria, $precio, $fecha; 
+    // Restablecer las variables a sus valores iniciales
+    $nombre = "";
+    $descripcion = "";
+    $categoria = "";
+    $precio = 0;
+    $fecha = date('Y-m-d');
+}
+
 $errores = [];
 $mensaje = "";
 $hayError = false;
@@ -17,7 +28,7 @@ $nombre = "";
 $descripcion = "";
 $categoria = "";
 $precio = 0;
-$mensaje = "";
+$fecha = date('Y-m-d');
 
 try {
     $config = require_once __DIR__ . '/../app/config.php';
@@ -33,6 +44,12 @@ try {
         $descripcion = trim(htmlspecialchars($_POST['descripcion']));
         $categoria = trim(htmlspecialchars($_POST['categoria']));
         $precio = floatval($_POST['precio']);
+        $fecha = $_POST['fecha'] ?? date('Y-m-d');
+
+        // Validar que la fecha no sea anterior a hoy
+        if ($fecha < date('Y-m-d')) {
+            throw new FileException("La fecha debe ser hoy o una fecha futura.");
+        }
 
         if ($precio < 0) {
             throw new FileException("El precio no puede ser negativo.");
@@ -53,10 +70,15 @@ try {
             $precio
         );
 
+        $imagenGaleria->setFecha($fecha); // Establecer la fecha
+
         $imagenesRepository->save($imagenGaleria); // Usamos el repositorio para guardar
 
         $mensaje = "Fichero enviado correctamente";
-        $imagenes = $imagenesRepository->findAll(); // Recargar imágenes después de guardar
+        $imagenes = $imagenesRepository->findAll();
+
+        // Reiniciar las variables
+        resetearVariables();
     }
 } catch (FileException | QueryException | AppException $exception) {
     $errores[] = $exception->getMessage();
