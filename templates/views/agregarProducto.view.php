@@ -49,9 +49,9 @@ $formularioEnviado = !empty($mensaje) && empty($errores);
                         <img src="" alt="" id="imgPreview" class="img-thumbnail mb-3 mt-3 d-none">
                     </div>
 
-                    <label class="col-sm-3 control-label" for="titulo">Titulo</label>
+                    <label class="col-sm-3 control-label" for="nombre">Nombre</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="titulo" name="titulo" value="<?= $titulo ?>"
+                        <input type="text" class="form-control" id="nombre" name="nombre" value="<?= $nombre ?>"
                             required>
                     </div>
                     <label class="col-sm-3 control-label" for="descripcion">Descripción</label>

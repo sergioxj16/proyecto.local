@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . '/../../core/app.class.php';
 class Connection
 {
     /**

@@ -1,13 +1,12 @@
 <?php
 
-use Src\Entity\Imagen;
-
 require_once __DIR__ . '/../src/utils/file.class.php';
 require_once __DIR__ . '/../src/exceptions/fileException.php';
 require_once __DIR__ . '/../src/exceptions/appException.php';
+require_once __DIR__ . '/../src/entity/iEntity.php';
 require_once __DIR__ . '/../src/entity/imagen.class.php';
-require_once __DIR__ . '/../src/database/queryBuilder.class.php';
 require_once __DIR__ . '/../src/database/connection.class.php';
+require_once __DIR__ . '/../src/repository/imagenesRepository.php';
 
 // Inicializamos variables
 $errores = [];
@@ -29,7 +28,7 @@ try {
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Recoger los datos del formulario
-        $titulo = trim(htmlspecialchars($_POST['titulo']));
+        $nombre = trim(htmlspecialchars($_POST['titulo']));
         $descripcion = trim(htmlspecialchars($_POST['descripcion']));
         $categoria = trim(htmlspecialchars($_POST['categoria']));
         $precio = trim(htmlspecialchars($_POST['precio']));
@@ -45,32 +44,25 @@ try {
         // Guardar la imagen en la ruta especificada
         $imagen->saveUploadFile(Imagen::RUTA_IMAGENES_GALERIA);
 
-        // Insertar los datos de la imagen en la base de datos
-        $sql = "INSERT INTO imagen (imagen, nombre, descripcion, categoria, precio, numLikes, propietario) 
-                VALUES (:imagen, :nombre, :descripcion, :categoria, :precio, :numLikes, :propietario)";
+        // Insertar los datos de la imagen en la base de datos utilizando el repositorio
+        $imagenRepo = new ImagenesRepository();
+        $imagenObj = new Imagen(
+            $imagen->getFileName(),
+            $nombre,
+            $descripcion,
+            $categoria,
+            $propietario,
+            $numLikes,
+            $precio
+        );
 
-        $pdoStatement = $conexion->prepare($sql);
-
-        // Parámetros de la consulta
-        $parametros = [
-            ':imagen' => $imagen->getFileName(),
-            ':nombre' => $nombre,
-            ':descripcion' => $descripcion,
-            ':categoria' => $categoria,
-            ':precio' => $precio,
-            ':numLikes' => $numLikes,
-            ':propietario' => $propietario
-        ];
-
-        // Ejecutar la consulta
-        if (!$pdoStatement->execute($parametros)) {
-            $errores[] = "No se ha podido guardar la imagen en la base de datos";
-        }
+        // Guardamos la imagen en la base de datos
+        $imagenRepo->save($imagenObj);
     }
 
-    // Buscar todas las imágenes en la base de datos
-    $queryBuilder = new QueryBuilder('imagenes', 'Imagen');
-    $imagenes = $queryBuilder->findAll();
+    // Buscar todas las imágenes en la base de datos utilizando el repositorio
+    $imagenRepo = new ImagenesRepository();
+    $imagenes = $imagenRepo->findAll();
 
 } catch (FileException $fileException) {
     $errores[] = $fileException->getMessage();
@@ -81,4 +73,4 @@ try {
 }
 
 // Cargar la vista
-require_once 'views/mostrargaleria.view.php';
+require_once 'views/mostrarGaleria.view.php';

@@ -1,12 +1,14 @@
 <?php
 require_once __DIR__ . '/../src/exceptions/AppException.php';
 require_once __DIR__ . '/../src/database/connection.class.php';
+
 class App
 {
     /**
      * @var array
      */
     private static $container = [];
+
     /**
      * @param string $key
      * @param $value
@@ -16,6 +18,7 @@ class App
     {
         static::$container[$key] = $value;
     }
+
     /**
      * @param string $key
      * @return mixed
@@ -27,6 +30,7 @@ class App
             throw new AppException("No se ha encontrado la clave $key en el contenedor");
         return static::$container[$key];
     }
+
     /**
      * @return PDO
      */

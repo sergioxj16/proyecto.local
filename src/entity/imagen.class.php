@@ -1,8 +1,6 @@
 <?php
 
-namespace Src\Entity;
-
-class Imagen
+class Imagen implements IEntity
 {
     private $id;
     private string $imagen;
@@ -24,7 +22,7 @@ class Imagen
         string $categoria = "",
         int $propietario = 0,
         int $numLikes = 0,
-        float $precio = 0,
+        float $precio = 0
     ) {
         $this->id = null;
         $this->imagen = $imagen;
@@ -40,6 +38,7 @@ class Imagen
     {
         return $this->id;
     }
+
     public function getImagen(): string
     {
         return $this->imagen;
@@ -55,6 +54,7 @@ class Imagen
     {
         return self::RUTA_IMAGENES_GALERIA . $this->getImagen();
     }
+
     public function getNombre(): string
     {
         return $this->nombre;
@@ -126,4 +126,16 @@ class Imagen
         return $this->descripcion;
     }
 
+    public function toArray(): array
+    {
+        return [
+            'imagen' => $this->getImagen(),
+            'nombre' => $this->getNombre(),
+            'descripcion' => $this->getDescripcion(),
+            'categoria' => $this->getCategoria(),
+            'propietario' => $this->getPropietario(),
+            'numLikes' => $this->getNumLikes(),
+            'precio' => $this->getPrecio()
+        ];
+    }
 }
