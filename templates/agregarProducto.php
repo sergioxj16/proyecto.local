@@ -4,6 +4,8 @@ use Src\Entity\Imagen;
 
 require_once __DIR__ . '/../src/utils/file.class.php';
 require_once __DIR__ . '/../src/exceptions/fileException.php';
+require_once __DIR__ . '/../src/exceptions/queryException.php';
+require_once __DIR__ . '/../src/exceptions/appException.php';
 require_once __DIR__ . '/../src/entity/imagen.class.php';
 require_once __DIR__ . '/../src/database/connection.class.php';
 
@@ -16,9 +18,14 @@ $mensaje = "";
 $hayError = false;
 $rutaGaleria = Imagen::RUTA_IMAGENES_GALERIA;
 
-// Verificar si el formulario fue enviado
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    try {
+$config = require_once __DIR__ . '/../app/config.php';
+App::bind('config', $config); // Guardamos la configuración en el contenedor de servicios
+$conexion = App::getConnection();
+
+try {
+
+    // Verificar si el formulario fue enviado
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Recoger los datos del formulario
         $titulo = trim(htmlspecialchars($_POST['titulo']));
         $descripcion = trim(htmlspecialchars($_POST['descripcion']));
@@ -66,16 +73,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $errores[] = "No se ha podido guardar la imagen en la base de datos";
             }
         }
-    } catch (FileException $fileException) {
-        // Si ocurre un error, capturarlo y mostrar el mensaje
-        $errores[] = $fileException->getMessage();
-        $hayError = true; // Si hay errores, cambiar a true
-        $titulo = "";
-        $descripcion = "";
-        $categoria = "";
-        $precio = 0;
     }
+} catch (FileException $fileException) {
+    // Si ocurre un error, capturarlo y mostrar el mensaje
+    $errores[] = $fileException->getMessage();
+    $hayError = true; // Si hay errores, cambiar a true
+    $titulo = "";
+    $descripcion = "";
+    $categoria = "";
+    $precio = 0;
+} catch (QueryException $queryException) {
+    $errores[] = $queryBuilder->getMessage();
+
+} catch (AppException $appException) {
+    $errores[] = $appException->getMessage();
 }
+
+
 
 if (empty($errores) && $mensaje == "") {
     $mensaje = '';  // Limpiar el mensaje

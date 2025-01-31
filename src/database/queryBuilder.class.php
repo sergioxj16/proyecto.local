@@ -1,41 +1,29 @@
 <?php
+use Src\Entity\Imagen;
 
 require_once __DIR__ . '/../entity/imagen.class.php';
 require_once __DIR__ . '/../exceptions/QueryException.php';
+require_once __DIR__ . '/../../core/app.class.php';
+
 
 class QueryBuilder
 {
-    /**
-     * @var PDO
-     */
+    private $table;
+    private $classEntity;
     private $connection;
-    public function __construct(PDO $connection)
+    public function __construct(string $table, string $classEntity)
     {
-        $this->connection = $connection;
+        $this->connection = App::getConnection();
+        $this->table = $table;
+        $this->classEntity = $classEntity;
     }
-    /* Función que le pasamos el nombre de la tabla y el nombre
-    de la clase a la cual queremos convertir los datos extraidos
-    de la tabla.
-    La función devolverá un array de objetos de la clase classEntity. */
-    /**
-     * @param string $tabla
-     * @param string $classEntity
-     * @return array
-     */
-    public function findAll(string $tabla, string $classEntity): array
+    public function findAll(): array
     {
-        $sql = "SELECT * FROM $tabla";
+        $sql = "SELECT * FROM $this->table";
         $pdoStatement = $this->connection->prepare($sql);
-
-        if (!$pdoStatement) {
-            throw new QueryException("Error al preparar la consulta SQL.");
-        }
-
-        if ($pdoStatement->execute()) {
-            return $pdoStatement->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $classEntity);
-        } else {
-            throw new QueryException("Error al ejecutar la consulta SQL.");
-        }
+        if ($pdoStatement->execute() === false)
+            throw new QueryException("No se ha podido ejecutar la query solicitada.");
+            return $pdoStatement->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "Src\Entity\\" . $this->classEntity);
 
     }
 }
