@@ -1,0 +1,28 @@
+/* Estilos para la opción activa del menú */
+.nav-item.active .nav-link {
+    color: #28a745 !important; /* Color verde */
+    font-weight: bold; /* Negrita */
+    border-bottom: 2px solid #28a745; /* Subrayado verde */
+}
+
+/* Estilo normal de los enlaces */
+.nav-link {
+    color: #bababa !important; /* Color oscuro para las opciones inactivas */
+    transition: color 0.3s ease-in-out, border-bottom 0.3s ease-in-out;
+}
+
+/* Cambio de color al pasar el mouse */
+.nav-link:hover {
+    color: #28a745 !important; /* Verde al pasar el mouse */
+}
+
+/* Asegurar que el nav tenga una buena apariencia */
+.navbar-nav {
+    display: flex;
+    gap: 15px;
+}
+
+/* Ajuste para que el borde inferior no afecte el diseño */
+.nav-item {
+    padding-bottom: 5px;
+}
