@@ -24,20 +24,21 @@ require_once __DIR__ . '/../src/utils/utils.class.php';
                     <li class="nav-item <?= Utils::esOpcionMenuActiva('/index.php') || Utils::esOpcionMenuActiva('/') ? 'active' : ''; ?>">
                         <a class="nav-link" href="index.php">Home</a>
                     </li>
-                    <li class="nav-item <?= Utils::esOpcionMenuActiva('/about.php') ? 'active' : ''; ?>">
-                        <a class="nav-link" href="about.php">About</a>
-                    </li>
+
                     <li class="nav-item <?= Utils::esOpcionMenuActiva('/shop.php') ? 'active' : ''; ?>">
-                        <a class="nav-link" href="shop.php">Shop</a>
-                    </li>
-                    <li class="nav-item <?= Utils::esOpcionMenuActiva('/contact.php') ? 'active' : ''; ?>">
-                        <a class="nav-link" href="contact.php">Contact</a>
+                        <a class="nav-link" href="shop.php">Tienda</a>
                     </li>
                     <li class="nav-item <?= Utils::esOpcionMenuActiva('/agregarProducto.php') ? 'active' : ''; ?>">
                         <a class="nav-link" href="agregarProducto.php">Añadir</a>
                     </li>
                     <li class="nav-item <?= Utils::esOpcionMenuActiva('/mostrarGaleria.php') ? 'active' : ''; ?>">
                         <a class="nav-link" href="mostrarGaleria.php">Galeria</a>
+                    </li>
+                    <li class="nav-item <?= Utils::esOpcionMenuActiva('/contact.php') ? 'active' : ''; ?>">
+                        <a class="nav-link" href="contact.php">Contact</a>
+                    </li>
+                    <li class="nav-item <?= Utils::esOpcionMenuActiva('/about.php') ? 'active' : ''; ?>">
+                        <a class="nav-link" href="about.php">About</a>
                     </li>
                 </ul>
             </div>

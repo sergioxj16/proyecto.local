@@ -7,7 +7,7 @@ $formularioEnviado = !empty($mensaje) && empty($errores);
 ?>
 
 <body>
-    <script src="../../public/js/imagenPrev.js" defer></script>
+    <script src="../../public/js/agregarProducto.js" defer></script>
     <!-- Start Header -->
     <?php
     require_once __DIR__ . "/../navegacion.part.php";
@@ -39,7 +39,7 @@ $formularioEnviado = !empty($mensaje) && empty($errores);
 
                 <!-- Formulario para subir imagen con su descripción -->
                 <form class="form-horizontal" id="formularioSubida" action="<?= $_SERVER['PHP_SELF'] ?>" method="post"
-                    enctype="multipart/form-data">
+                    enctype="multipart/form-data" onsubmit="return validarPrecio()">
 
                     <label class="col-sm-3 control-label" for="imagen">Imagen</label>
                     <div class="col-sm-9">
@@ -62,14 +62,22 @@ $formularioEnviado = !empty($mensaje) && empty($errores);
 
                     <label class="col-sm-3 control-label" for="categoria">Categoría</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="categoria" name="categoria"
-                            value="<?= $categoria ?>" required>
+                        <select class="form-control" id="categoria" name="categoria" required>
+                            <option value="" disabled <?= $categoria == '' ? 'selected' : '' ?>>Seleccionar categoría
+                            </option>
+                            <option value="1" <?= $categoria == '1' ? 'selected' : '' ?>>1</option>
+                            <option value="2" <?= $categoria == '2' ? 'selected' : '' ?>>2</option>
+                            <option value="3" <?= $categoria == '3' ? 'selected' : '' ?>>3</option>
+                        </select>
                     </div>
 
                     <label class="col-sm-3 control-label" for="precio">Precio</label>
                     <div class="col-sm-9">
-                        <input type="number" class="form-control" id="precio" name="precio" value="<?= $precio ?>"
+                        <input type="text" class="form-control" id="precio" name="precio" value="<?= $precio ?>"
                             required>
+                    </div>
+                    <div id="errorPrecio" class="text-danger" style="display:none;">
+                        El precio debe tener solo dos decimales.
                     </div>
 
                     <div class="col-sm-offset-3 col-sm-9 pt-3 d-flex">
@@ -82,11 +90,6 @@ $formularioEnviado = !empty($mensaje) && empty($errores);
     </div>
 
     <script>
-        function borrarFormulario() {
-            document.getElementById('formularioSubida').reset(); // Resetea todos los campos del formulario
-        }
-
-        // Borrar el formulario después de un envío exitoso
         <?php if ($formularioEnviado): ?>
             borrarFormulario();
         <?php endif; ?>

@@ -1,145 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
-<?php
-require_once __DIR__ . "/../inicio.part.php";
-?>
+<?php require_once __DIR__ . "/../inicio.part.php"; ?>
 
 <body>
-    <!-- Open Top Nav -->
-    <?php
-    require_once __DIR__ . "/../navegacion.part.php";
-    ?>
-    <!-- Close Top Nav -->
+    <?php require_once __DIR__ . "/../navegacion.part.php"; ?>
 
-    <!-- Start Content -->
-    <div class="container py-5">
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Tienda</h2>
+        <hr>
 
-    </div>
-    <!-- End Content -->
+        <?php if (!empty($errores)): ?>
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    <?php foreach ($errores as $error): ?>
+                        <li><?php echo htmlspecialchars($error); ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
 
-    <!-- Start Brands -->
-    <section class="bg-light py-5">
-        <div class="container my-4">
-            <div class="row text-center py-3">
-                <div class="col-lg-6 m-auto">
-                    <h1 class="h1">Our Brands</h1>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        Lorem ipsum dolor sit amet.
-                    </p>
-                </div>
-                <div class="col-lg-9 m-auto tempaltemo-carousel">
-                    <div class="row d-flex flex-row">
-                        <!--Controls-->
-                        <div class="col-1 align-self-center">
-                            <a class="h1" href="#multi-item-example" role="button" data-bs-slide="prev">
-                                <i class="text-light fas fa-chevron-left"></i>
-                            </a>
-                        </div>
-                        <!--End Controls-->
+        <?php if (!empty($mensaje)): ?>
+            <div class="alert alert-success">
+                <?php echo htmlspecialchars($mensaje); ?>
+            </div>
+        <?php endif; ?>
 
-                        <!--Carousel Wrapper-->
-                        <div class="col">
-                            <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="multi-item-example"
-                                data-bs-ride="carousel">
-                                <!--Slides-->
-                                <div class="carousel-inner product-links-wap" role="listbox">
+        <div id="MostrarGaleria">
+            <?php if (!empty($imagenes)): ?>
+                <div class="row">
+                    <?php foreach ($imagenes as $imagen): ?>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 shadow-sm">
+                                <img src="<?= $imagen->getUrlGaleria() ?>" class="card-img-top img-fluid"
+                                    style="height: 200px; object-fit: cover;"
+                                    alt="<?= htmlspecialchars($imagen->getNombre()) ?>">
 
-                                    <!--First slide-->
-                                    <div class="carousel-item active">
-                                        <div class="row">
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="../../public/img/brand_01.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="../../public/img/brand_02.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="../../public/img/brand_03.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="../../public/img/brand_04.png" alt="Brand Logo"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--End First slide-->
-
-                                    <!--Second slide-->
-                                    <div class="carousel-item">
-                                        <div class="row">
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="../../public/img/brand_01.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="../../public/img/brand_02.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="../../public/img/brand_03.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="../../public/img/brand_04.png" alt="Brand Logo"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--End Second slide-->
-
-                                    <!--Third slide-->
-                                    <div class="carousel-item">
-                                        <div class="row">
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="../../public/img/brand_01.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="../../public/img/brand_02.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="../../public/img/brand_03.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img"
-                                                        src="../../public/img/brand_04.png" alt="Brand Logo"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--End Third slide-->
-
+                                <div class="card-body">
+                                    <h5 class="card-title"><?= htmlspecialchars($imagen->getNombre()) ?></h5>
+                                    <p class="card-text text-muted"><?= htmlspecialchars($imagen->getDescripcion()) ?></p>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <strong>Categoría:</strong> <?= htmlspecialchars($imagen->getCategoria()) ?>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Likes:</strong> <?= htmlspecialchars($imagen->getNumLikes()) ?>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Precio:</strong> <?= htmlspecialchars($imagen->getPrecio()) ?>€
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Propietario:</strong> <?= htmlspecialchars($imagen->getPropietario()) ?>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <!--End Slides-->
+
+                                <div class="card-footer text-center">
+                                    <a href="#" class="btn btn-primary btn-sm">Ver más</a>
+                                    <a href="#" class="btn btn-success">like</a>
+                                </div>
                             </div>
                         </div>
-                        <!--End Carousel Wrapper-->
-
-                        <!--Controls-->
-                        <div class="col-1 align-self-center">
-                            <a class="h1" href="#multi-item-example" role="button" data-bs-slide="next">
-                                <i class="text-light fas fa-chevron-right"></i>
-                            </a>
-                        </div>
-                        <!--End Controls-->
-                    </div>
+                    <?php endforeach; ?>
                 </div>
-            </div>
+            <?php else: ?>
+                <p class="text-center text-muted">No hay imágenes disponibles en la galería.</p>
+            <?php endif; ?>
         </div>
-    </section>
-    <!--End Brands-->
+    </div>
 
+    <?php require_once __DIR__ . "/../fin.part.php"; ?>
 
-    <!-- Start Footer -->
-    <?php
-    require_once __DIR__ . "/../fin.part.php";
-    ?>
 </body>
 
 </html>

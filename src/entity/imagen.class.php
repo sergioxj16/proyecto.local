@@ -11,36 +11,50 @@ class Imagen
     private string $categoria;
     private int $propietario;
     private int $numLikes;
-    private int $precio;
+    private float $precio;
 
     const RUTA_IMAGENES_PORTFOLIO = '/public/imagesSubidas/index/portfolio/';
     const RUTA_IMAGENES_GALERIA = '../public/imagesSubidas/galeria/';
     const RUTA_IMAGENES_CLIENTES = '/public/imagesSubidas/clients/';
 
     public function __construct(
+        string $imagen = "",
         string $nombre = "",
         string $descripcion = "",
         string $categoria = "",
         int $propietario = 0,
         int $numLikes = 0,
-        int $precio = 0,
-        string $imagen = ""
+        float $precio = 0,
     ) {
         $this->id = null;
+        $this->imagen = $imagen;
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
         $this->categoria = $categoria;
         $this->propietario = $propietario;
         $this->numLikes = $numLikes;
-        $this->precio = $precio;
-        $this->imagen = $imagen;
+        $this->setPrecio($precio);
     }
 
     public function getId()
     {
         return $this->id;
     }
+    public function getImagen(): string
+    {
+        return $this->imagen;
+    }
 
+    public function setImagen(string $imagen): Imagen
+    {
+        $this->imagen = $imagen;
+        return $this;
+    }
+
+    public function getUrlGaleria(): string
+    {
+        return self::RUTA_IMAGENES_GALERIA . $this->getImagen();
+    }
     public function getNombre(): string
     {
         return $this->nombre;
@@ -96,25 +110,14 @@ class Imagen
         return $this;
     }
 
-    public function getPrecio(): int
+    public function getPrecio(): float
     {
         return $this->precio;
     }
 
-    public function setPrecio(int $precio): Imagen
+    public function setPrecio(float $precio): Imagen
     {
-        $this->precio = $precio;
-        return $this;
-    }
-
-    public function getImagen(): string
-    {
-        return $this->imagen;
-    }
-
-    public function setImagen(string $imagen): Imagen
-    {
-        $this->imagen = $imagen;
+        $this->precio = round($precio, 2);
         return $this;
     }
 
@@ -123,8 +126,4 @@ class Imagen
         return $this->descripcion;
     }
 
-    public function getUrlGaleria(): string
-    {
-        return self::RUTA_IMAGENES_GALERIA . $this->getImagen();
-    }
 }
