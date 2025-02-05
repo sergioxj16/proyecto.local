@@ -1,31 +1,33 @@
 <?php
 namespace sergio\app\utils;
+
 class Utils
 {
     public static function esOpcionMenuActiva($opcion): bool
     {
-        $actual = $_SERVER['REQUEST_URI'];
-        if ($actual === $opcion) {
-            return true;
-        } else {
-            return false;
-        }
+        $actual = trim($_SERVER['REQUEST_URI'], '/');
+        $opcion = trim($opcion, '/');
+
+        return $actual === $opcion || (empty($actual) && $opcion === ''); 
     }
+
     public static function existeOpcionMenuActivaEnArray($opciones): bool
     {
-        foreach ($opciones as $opcionMenu)
-            if (self::esOpcionMenuActiva($opcionMenu) === true)
+        foreach ($opciones as $opcionMenu) {
+            if (self::esOpcionMenuActiva($opcionMenu)) {
                 return true;
+            }
+        }
         return false;
     }
+
     public static function extraeElementosAleatorios($lista, $cantidad): array
     {
-        if ($cantidad < 1)
+        if (!is_array($lista) || empty($lista) || $cantidad < 1) {
             return [];
-        else {
-            shuffle($lista);
-            $listaNueva = array_chunk($lista, $cantidad);
-            return $listaNueva[0];
         }
+
+        shuffle($lista);
+        return array_slice($lista, 0, $cantidad);
     }
 }
