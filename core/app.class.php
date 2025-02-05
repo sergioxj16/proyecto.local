@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../src/exceptions/AppException.php';
-require_once __DIR__ . '/../src/database/connection.class.php';
+require_once __DIR__ . '/../app/exceptions/AppException.php';
+require_once __DIR__ . '/./database/connection.class.php';
 
 
 class App
@@ -37,9 +37,23 @@ class App
      */
     public static function getConnection()
     {
-        if (!array_key_exists('connection', static::$container))
+        try {
             $config = static::get('config');
-        static::$container['connection'] = Connection::make();
+        } catch (AppException $e) {
+            throw new AppException("Error al obtener la configuración: " . $e->getMessage());
+        }
+
+        if (!isset($config['database'])) {
+            throw new AppException("La configuración de la base de datos no está definida.");
+        }
+
+        if (!array_key_exists('connection', static::$container)) {
+            static::$container['connection'] = Connection::make();
+        }
+
         return static::$container['connection'];
     }
+
+
+
 }
