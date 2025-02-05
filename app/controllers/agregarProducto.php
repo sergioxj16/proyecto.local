@@ -76,7 +76,7 @@ try {
         $imagenGaleria->setFecha($fecha); // Establecer la fecha
 
         $imagenesRepository->save($imagenGaleria); // Usamos el repositorio para guardar
-
+        
         $mensaje = "Fichero enviado correctamente";
         $imagenes = $imagenesRepository->findAll();
 

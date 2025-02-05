@@ -11,7 +11,7 @@ class Imagen implements IEntity
     private int $numLikes;
     private float $precio;
     private string $fecha;
-    const RUTA_IMAGENES_GALERIA = "/../../public/imagesSubidas/galeria/";
+    const RUTA_IMAGENES_GALERIA = "./public/imagesSubidas/galeria/";
 
     public function __construct(
         string $imagen = "",
