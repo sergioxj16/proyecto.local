@@ -6,6 +6,7 @@ use function sergio\app\getConfig;
 use sergio\app\entity\User;
 use sergio\app\exceptions\AppException;
 
+session_start();
 $errores = [];
 $mensaje = "";
 $hayError = false;
@@ -23,8 +24,16 @@ try {
         $email = trim(htmlspecialchars($_POST['email']));
         $password = trim($_POST['password']);
         $passwordConfirm = trim($_POST['password_confirm']);
+        $captchaIngresado = trim($_POST['captcha']);
 
-        // Validación de los campos
+        // Validación del CAPTCHA
+        if (!isset($_SESSION['captchaGenerado']) || strtoupper($captchaIngresado) !== $_SESSION['captchaGenerado']) {
+            throw new AppException("¡Código de seguridad incorrecto! Inténtelo de nuevo.");
+        }
+
+        unset($_SESSION['captchaGenerado']); // Eliminar el CAPTCHA de la sesión
+
+        // Validaciones adicionales
         if (empty($nombre) || empty($apellido) || empty($email) || empty($password) || empty($passwordConfirm)) {
             throw new AppException("Todos los campos son obligatorios.");
         }
@@ -41,10 +50,7 @@ try {
             throw new AppException("El correo electrónico ya está registrado.");
         }
 
-        // No hacemos hash de la contraseña, se guarda en crudo
-        $user = new User($email, $nombre, $apellido, $password); // Contraseña en crudo
-
-        // Guardar el usuario en la base de datos
+        $user = new User($email, $nombre, $apellido, $password);
         $usersRepository->save($user);
 
         $mensaje = "Registro exitoso. Ahora puedes iniciar sesión.";
@@ -55,4 +61,3 @@ try {
 }
 
 require_once __DIR__ . '/../views/register.view.php';
-?>

@@ -3,7 +3,11 @@
 
 <?php
 require_once __DIR__ . "/../controllers/inicio.part.php";
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
+
 
 <body>
     <!-- Start Header -->
@@ -21,15 +25,18 @@ require_once __DIR__ . "/../controllers/inicio.part.php";
                         <form class="form-horizontal" id="formularioRegistro" action="/register" method="post">
                             <div class="mb-3">
                                 <label for="nombre" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" value="<?= htmlspecialchars($nombre ?? '') ?>" required>
+                                <input type="text" class="form-control" id="nombre" name="nombre"
+                                    value="<?= htmlspecialchars($nombre ?? '') ?>" required>
                             </div>
                             <div class="mb-3">
                                 <label for="apellido" class="form-label">Apellidos</label>
-                                <input type="text" class="form-control" id="apellidos" name="apellido" value="<?= htmlspecialchars($apellido ?? '') ?>" required>
+                                <input type="text" class="form-control" id="apellidos" name="apellido"
+                                    value="<?= htmlspecialchars($apellido ?? '') ?>" required>
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Correo electrónico</label>
-                                <input type="email" class="form-control" id="email" name="email" value="<?= htmlspecialchars($email ?? '') ?>" required>
+                                <input type="email" class="form-control" id="email" name="email"
+                                    value="<?= htmlspecialchars($email ?? '') ?>" required>
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Contraseña</label>
@@ -37,7 +44,17 @@ require_once __DIR__ . "/../controllers/inicio.part.php";
                             </div>
                             <div class="mb-3">
                                 <label for="password_confirm" class="form-label">Confirmar contraseña</label>
-                                <input type="password" class="form-control" id="password_confirm" name="password_confirm" required>
+                                <input type="password" class="form-control" id="password_confirm"
+                                    name="password_confirm" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Introduce el CAPTCHA</label>
+                                <div class="d-flex align-items-center">
+                                    <img style="border: 1px solid #D3D0D0; margin-right: 10px;" src="/app/utils/captcha.php" id="captcha">
+                                    <button type="button" class="btn btn-secondary btn-sm"
+                                        onclick="document.getElementById('captcha').src='/app/utils/captcha.php?' + Math.random()">⟳</button>
+                                </div>
+                                <input type="text" class="form-control mt-2" name="captcha" required>
                             </div>
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary">Registrarse</button>
