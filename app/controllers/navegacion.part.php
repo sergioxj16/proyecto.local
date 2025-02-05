@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/../utils/utils.class.php';
+use sergio\app\utils\Utils;
+
 ?>
 
 <!-- Header -->
@@ -21,7 +22,7 @@ require_once __DIR__ . '/../utils/utils.class.php';
             <div class="flex-fill">
                 <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
 
-                    <li class="nav-item <?= Utils::esOpcionMenuActiva('') || Utils::esOpcionMenuActiva('') ? 'active' : ''; ?>">
+                    <li class="nav-item <?= Utils::esOpcionMenuActiva('') ? 'active' : ''; ?>">
                         <a class="nav-link" href="/">Home</a>
                     </li>
 

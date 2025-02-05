@@ -1,4 +1,11 @@
 <?php
+namespace sergio\app\database;
+use sergio\app\exceptions\AppException;
+use sergio\core\App;
+
+use PDO;
+use PDOException;
+
 class Connection
 {
     /**

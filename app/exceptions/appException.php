@@ -1,5 +1,6 @@
 <?php
-class AppException extends Exception
-{
-    
-}
+namespace sergio\app\exceptions;
+
+use Exception;
+
+class AppException extends Exception { }

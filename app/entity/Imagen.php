@@ -1,5 +1,7 @@
 <?php
+namespace sergio\app\entity;
 
+use sergio\app\entity\IEntity;
 class Imagen implements IEntity
 {
     private $id;

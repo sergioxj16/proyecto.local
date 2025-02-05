@@ -1,7 +1,10 @@
 <?php
-require_once __DIR__ . '/../../core/database/connection.class.php';
-require_once __DIR__ . '/../entity/user.class.php';
-require_once __DIR__ . '/../exceptions/queryException.php';
+namespace sergio\app\repository;
+
+use sergio\app\exceptions\QueryException;
+use sergio\app\entity\User;
+use PDOException;
+use sergio\core\App;
 
 class UserRepository
 {

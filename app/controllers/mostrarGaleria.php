@@ -1,13 +1,10 @@
 <?php
-
-require_once __DIR__ . '/../utils/file.class.php';
-require_once __DIR__ . '/../exceptions/fileException.php';
-require_once __DIR__ . '/../exceptions/appException.php';
-require_once __DIR__ . '/../entity/iEntity.php';
-require_once __DIR__ . '/../entity/imagen.class.php';
-require_once __DIR__ . '/../../core/database/connection.class.php';
-require_once __DIR__ . '/../repository/imagenesRepository.php';
-require_once __DIR__ . '/../config.php';
+use sergio\app\exceptions\FileException;
+use sergio\app\exceptions\QueryException;
+use sergio\app\entity\Imagen;
+use sergio\core\App;
+use sergio\app\repository\ImagenesRepository;
+use function sergio\app\getConfig;
 
 $errores = [];
 $mensaje = '';

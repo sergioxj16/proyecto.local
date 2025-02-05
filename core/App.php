@@ -1,6 +1,8 @@
 <?php
-require_once __DIR__ . '/../app/exceptions/AppException.php';
-require_once __DIR__ . '/./database/connection.class.php';
+namespace sergio\Core;
+
+use sergio\app\database\Connection;
+use sergio\app\exceptions\AppException;
 
 
 class App

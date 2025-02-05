@@ -1,4 +1,8 @@
 <?php
+namespace sergio\app;
+use PDO;
+use PDOException;
+
 function getConfig(){
     return [
         'database' => [

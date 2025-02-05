@@ -39,7 +39,7 @@ $formularioEnviado = !empty($mensaje) && empty($errores);
                 <?php endif; ?>
 
                 <!-- Formulario para subir imagen con su descripción -->
-                <form class="form-horizontal" id="formularioSubida" action="<?= Request::uri() ?>" method="post"
+                <form class="form-horizontal" id="formularioSubida" action="/agregarProducto" method="post"
                     enctype="multipart/form-data" onsubmit="return validarPrecio()">
 
                     <label class="col-sm-3 control-label" for="imagen">Imagen</label>

@@ -1,8 +1,10 @@
 <?php
-require_once __DIR__ . '/../exceptions/appException.php';
-require_once __DIR__ . '/../exceptions/queryException.php';
-require_once __DIR__ . '/../../core/database/connection.class.php';
-require_once __DIR__ . '/../repository/userRepository.php';
+use sergio\app\exceptions\QueryException;
+use sergio\core\App;
+use sergio\app\repository\UserRepository;
+use function sergio\app\getConfig;
+use sergio\app\entity\User;
+use sergio\app\exceptions\AppException;
 
 $errores = [];
 $mensaje = "";

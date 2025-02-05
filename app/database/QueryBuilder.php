@@ -1,11 +1,11 @@
 <?php
+namespace sergio\app\database;
 
-require_once __DIR__ . '/../../app/entity/IEntity.php';
-require_once __DIR__ . '/../../app/entity/imagen.class.php';
-require_once __DIR__ . '/../../core/app.class.php';
-require_once __DIR__ . '/../../app/exceptions/QueryException.php';
-require_once __DIR__ . '/./connection.class.php';
-
+use PDO;
+use PDOException;
+use sergio\app\exceptions\QueryException;
+use sergio\app\entity\IEntity;
+use sergio\Core\App;
 
 abstract class QueryBuilder
 {

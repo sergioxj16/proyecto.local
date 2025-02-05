@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/Request.php';
-require_once __DIR__ . '/../app/exceptions/notFoundException.php';
+namespace sergio\Core;
 
+use sergio\app\exceptions\NotFoundException;
 class Router
 {
     private $routes;

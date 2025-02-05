@@ -18,7 +18,7 @@ require_once __DIR__ . "/../controllers/inicio.part.php";
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title text-center mb-4">Registro</h4>
-                        <form class="form-horizontal" id="formularioRegistro" action="<?= Request::uri() ?>" method="post">
+                        <form class="form-horizontal" id="formularioRegistro" action="/register" method="post">
                             <div class="mb-3">
                                 <label for="nombre" class="form-label">Nombre</label>
                                 <input type="text" class="form-control" id="nombre" name="nombre" value="<?= htmlspecialchars($nombre ?? '') ?>" required>

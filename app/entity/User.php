@@ -1,5 +1,6 @@
 <?php
-class User {
+namespace sergio\app\entity;
+class User implements IEntity{
     private int $id;
     private string $correo;
     private string $nombre;
@@ -12,7 +13,7 @@ class User {
         $this->correo = $correo;
         $this->nombre = $nombre;
         $this->apellido = $apellido;
-        $this->password = $password; // Contraseña en crudo, sin hash
+        $this->password = $password;
         $this->rol = $rol;
     }
 
@@ -62,6 +63,16 @@ class User {
 
     public function setPassword(string $password): void {
         $this->password = $password; // Establecer la contraseña en crudo
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'username' => $this->nombre,
+            'password' => $this->password,
+            'role' => $this->rol,
+        ];
     }
 }
 ?>

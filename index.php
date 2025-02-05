@@ -1,15 +1,17 @@
 <?php
-require_once __DIR__ . '/core/bootstrap.php';
-require_once __DIR__ . '/core/router.class.php';
-require_once __DIR__ . '/core/request.php';
-require_once __DIR__ . '/app/exceptions/appException.php';
-require_once __DIR__ . '/app/exceptions/notFoundException.php';
+use sergio\app\exceptions\NotFoundException;
+use sergio\core\Request;
+use sergio\core\App;
+use sergio\Core\Router;
+
+require_once __DIR__ . '/vendor/autoload.php';
 
 // Crea el objeto Router
 $router = new Router();
 
 // Cargar las rutas
-require 'app/routes.php';
+require_once __DIR__ . '/app/config.php';
+
 
 // Configuración
 $config = require_once __DIR__ . '/app/config.php';

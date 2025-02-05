@@ -1,6 +1,7 @@
 <?php
-require_once __DIR__ . '/../exceptions/fileException.php';
+namespace sergio\app\utils;
 
+use sergio\app\exceptions\FileException;
 /**
  * @param string $fileName
  * @param array $arrTypes

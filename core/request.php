@@ -1,5 +1,5 @@
 <?php
-
+namespace sergio\Core;
 class Request
 {
     public static function uri()

@@ -1,12 +1,16 @@
 <?php
-
-require_once __DIR__ . '/../../core/database/queryBuilder.class.php';
+namespace sergio\app\repository;
+use sergio\app\entity\Imagen;
+use PDO;
+use PDOException;
+use sergio\app\database\QueryBuilder;
 
 class ImagenesRepository extends QueryBuilder
 {
     public function __construct()
     {
-        parent::__construct('imagenes', 'Imagen');
+        parent::__construct('imagenes', Imagen::class);
+
     }
 
     public function findAll($fecha = '', $precio = '', $likes = '', $categoria = '', $ordenar = ''): array
