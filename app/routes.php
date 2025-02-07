@@ -10,5 +10,6 @@ $router->define([
     'register' => 'app/controllers/register.php',
     'editarProducto' => 'app/controllers/editarProducto.php',
     'logout' => 'app/controllers/logout.php',
-    'perfil' => 'app/controllers/perfil.php'
+    'perfil' => 'app/controllers/perfil.php',
+    'editarPerfil' => 'app/controllers/editarPerfil.php'
 ]);

@@ -6,6 +6,7 @@ use sergio\core\App;
 use sergio\app\repository\ImagenesRepository;
 use function sergio\app\getConfig;
 
+session_start();
 $errores = [];
 $mensaje = '';
 $fecha = $_GET['fecha'] ?? '';

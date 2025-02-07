@@ -142,9 +142,17 @@
 
                                 <div class="card-footer text-center">
                                     <a href="imagenDetalles?id=<?= $imagen->getId() ?>" class="btn btn-primary">Ver más</a>
-                                    <a href="#" class="btn btn-success like-btn" data-id="<?= $imagen->getId() ?>">Like</a>
 
+                                    <?php if (isset($_SESSION['usuario'])): ?>
+                                        <!-- Si el usuario está logueado, muestra el botón de Like -->
+                                        <a href="#" class="btn btn-success like-btn" data-id="<?= $imagen->getId() ?>">Like</a>
+                                    <?php else: ?>
+                                        <!-- Si no está logueado, muestra el mensaje de inicio de sesión -->
+                                        <a href="login" class="btn btn-secondary">Inicia sesión para dar Like</a>
+                                    <?php endif; ?>
                                 </div>
+
+
                             </div>
                         </div>
                     <?php endforeach; ?>

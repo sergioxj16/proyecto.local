@@ -92,4 +92,21 @@ class UserRepository
 
         return null;
     }
+
+    public function update($id, $nombre, $apellido, $correo)
+{
+    try {
+        $query = "UPDATE usuarios SET nombre = :nombre, apellido = :apellido, correo = :correo WHERE id = :id";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->execute([
+            ':id' => $id,
+            ':nombre' => $nombre,
+            ':apellido' => $apellido,
+            ':correo' => $correo
+        ]);
+    } catch (PDOException $e) {
+        throw new QueryException("Error al actualizar el perfil: " . $e->getMessage());
+    }
+}
+
 }

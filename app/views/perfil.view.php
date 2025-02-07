@@ -28,7 +28,7 @@ require_once __DIR__ . "/../controllers/inicio.part.php";
                         </ul>
 
                         <div class="text-center mt-4">
-                            <a href="editarPerfil.php" class="btn btn-primary">Editar Perfil</a>
+                            <a href="editarPerfil" class="btn btn-primary">Editar Perfil</a>
                         </div>
                     </div>
                 </div>
