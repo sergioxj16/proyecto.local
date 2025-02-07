@@ -1,235 +1,188 @@
 <!DOCTYPE html>
-<html lang="en">
-<?php
-require_once __DIR__ . "/../controllers/inicio.part.php";
-?>
+<html lang="es">
+
+<?php require_once __DIR__ . "/../controllers/inicio.part.php"; ?>
 
 <body>
+    <?php require_once __DIR__ . "/../controllers/navegacion.part.php"; ?>
 
-    <?php
-    require_once __DIR__ . "/../controllers/navegacion.part.php";
-    ?>
-
-    <!-- Start Banner Hero -->
-    <div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="0" class="active"></li>
-            <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="1"></li>
-            <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="container">
-                    <div class="row p-5">
-                        <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                            <img class="img-fluid" src="../../public/img/banner_img_01.jpg" alt="">
-                        </div>
-                        <div class="col-lg-6 mb-0 d-flex align-items-center">
-                            <div class="text-align-left align-self-center">
-                                <h1 class="h1 text-success"><b>Zay</b> eCommerce</h1>
-                                <h3 class="h2">Tiny and Perfect eCommerce Template</h3>
-                                <p>
-                                    Zay Shop is an eCommerce HTML5 CSS template with latest version of Bootstrap 5 (beta
-                                    1).
-                                    This template is 100% free provided by <a rel="sponsored" class="text-success"
-                                        href="https://templatemo.com" target="_blank">TemplateMo</a> website.
-                                    Image credits go to <a rel="sponsored" class="text-success"
-                                        href="https://stories.freepik.com/" target="_blank">Freepik Stories</a>,
-                                    <a rel="sponsored" class="text-success" href="https://unsplash.com/"
-                                        target="_blank">Unsplash</a> and
-                                    <a rel="sponsored" class="text-success" href="https://icons8.com/"
-                                        target="_blank">Icons 8</a>.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Productos</h2>
+        <hr>
+        <div class="mb-3">
+            <?php
+            $filtroActivo = '';
+            if (isset($_GET['fecha']) && $_GET['fecha'] !== '') {
+                $filtroActivo = 'Filtrando por Fecha: ' . htmlspecialchars($_GET['fecha']);
+            } elseif (isset($_GET['precio']) && $_GET['precio'] !== '') {
+                $filtroActivo = 'Filtrando por Precio: Hasta ' . htmlspecialchars($_GET['precio']) . '€';
+            } elseif (isset($_GET['likes']) && $_GET['likes'] !== '') {
+                $filtroActivo = 'Filtrando por Likes: Mínimo ' . htmlspecialchars($_GET['likes']);
+            } elseif (isset($_GET['categoria']) && $_GET['categoria'] !== '') {
+                $filtroActivo = 'Filtrando por Categoría: ' . htmlspecialchars($_GET['categoria']);
+            } elseif (isset($_GET['autor']) && $_GET['autor'] !== '') {
+                $filtroActivo = 'Buscando por Autor: ' . htmlspecialchars($_GET['autor']);
+            } elseif (isset($_GET['ordenar'])) {
+                $filtroActivo = $_GET['ordenar'] === 'precio' ? 'Ordenando por Precio' : 'Ordenando por Likes';
+            }
+            if ($filtroActivo): ?>
+                <div class="alert alert-info">
+                    <strong>Filtro activo:</strong> <?= $filtroActivo ?>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <div class="container">
-                    <div class="row p-5">
-                        <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                            <img class="img-fluid" src="../../public/img/banner_img_02.jpg" alt="">
-                        </div>
-                        <div class="col-lg-6 mb-0 d-flex align-items-center">
-                            <div class="text-align-left">
-                                <h1 class="h1">Proident occaecat</h1>
-                                <h3 class="h2">Aliquip ex ea commodo consequat</h3>
-                                <p>
-                                    You are permitted to use this Zay CSS template for your commercial websites.
-                                    You are <strong>not permitted</strong> to re-distribute the template ZIP file in any
-                                    kind of template collection websites.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="container">
-                    <div class="row p-5">
-                        <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                            <img class="img-fluid" src="../../public/img/banner_img_03.jpg" alt="">
-                        </div>
-                        <div class="col-lg-6 mb-0 d-flex align-items-center">
-                            <div class="text-align-left">
-                                <h1 class="h1">Repr in voluptate</h1>
-                                <h3 class="h2">Ullamco laboris nisi ut </h3>
-                                <p>
-                                    We bring you 100% free CSS templates for your websites.
-                                    If you wish to support TemplateMo, please make a small contribution via PayPal or
-                                    tell your friends about our website. Thank you.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php endif; ?>
         </div>
-        <a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#template-mo-zay-hero-carousel"
-            role="button" data-bs-slide="prev">
-            <i class="fas fa-chevron-left"></i>
-        </a>
-        <a class="carousel-control-next text-decoration-none w-auto pe-3" href="#template-mo-zay-hero-carousel"
-            role="button" data-bs-slide="next">
-            <i class="fas fa-chevron-right"></i>
-        </a>
+
+        <form method="get" class="mb-4">
+            <div class="row g-3 align-items-end">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="fecha" class="form-label">Filtrar por Fecha</label>
+                        <input type="date" class="form-control" id="fecha" name="fecha"
+                            value="<?= $_GET['fecha'] ?? '' ?>">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="precio" class="form-label">Filtrar por Precio</label>
+                        <input type="number" class="form-control" id="precio" name="precio" min="0" step="0.01"
+                            value="<?= $_GET['precio'] ?? '' ?>">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="likes" class="form-label">Filtrar por Likes</label>
+                        <input type="number" class="form-control" id="likes" name="likes" min="0"
+                            value="<?= $_GET['likes'] ?? '' ?>">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="categoria" class="form-label">Filtrar por Categoría</label>
+                        <select class="form-control" id="categoria" name="categoria">
+                            <option value="">Selecciona una categoría</option>
+                            <option value="1" <?= ($_GET['categoria'] ?? '') === '1' ? 'selected' : '' ?>>1</option>
+                            <option value="2" <?= ($_GET['categoria'] ?? '') === '2' ? 'selected' : '' ?>>2</option>
+                            <option value="3" <?= ($_GET['categoria'] ?? '') === '3' ? 'selected' : '' ?>>3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="autor" class="form-label">Buscar por Propietario</label>
+                        <input type="text" class="form-control" id="autor" name="Propietario"
+                            value="<?= $_GET['propietario'] ?? '' ?>" placeholder="Buscar Propietario...">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-primary me-md-2">
+                            <i class="bi bi-funnel"></i> Filtrar
+                        </button>
+                        <a href="/" class="btn btn-secondary">
+                            <i class="bi bi-arrow-counterclockwise"></i> Limpiar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="mb-4">
+            <a href="?ordenar=precio" class="btn btn-success me-2">Ordenar por Precio</a>
+            <a href="?ordenar=likes" class="btn btn-warning">Ordenar por Likes</a>
+        </div>
+
+        <?php if (!empty($errores)): ?>
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    <?php foreach ($errores as $error): ?>
+                        <li><?php echo htmlspecialchars($error); ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+
+        <?php if (!empty($mensaje)): ?>
+            <div class="alert alert-success">
+                <?php echo htmlspecialchars($mensaje); ?>
+            </div>
+        <?php endif; ?>
+
+        <div id="MostrarGaleria">
+            <?php if (!empty($imagenes)): ?>
+                <div class="row">
+                    <?php foreach ($imagenes as $imagen): ?>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 shadow-sm">
+                                <img src="<?= $imagen->getUrlGaleria() ?>" class="card-img-top img-fluid"
+                                    style="height: 200px; object-fit: cover;"
+                                    alt="<?= htmlspecialchars($imagen->getNombre()) ?>">
+
+                                <div class="card-body">
+                                    <h5 class="card-title"><?= htmlspecialchars($imagen->getNombre()) ?></h5>
+                                    <p class="card-text limit-description"><?= htmlspecialchars($imagen->getDescripcion()) ?>
+                                    </p>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <strong>Categoría:</strong> <?= htmlspecialchars($imagen->getCategoria()) ?>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Likes:</strong> <?= htmlspecialchars($imagen->getNumLikes()) ?>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Precio:</strong> <?= htmlspecialchars($imagen->getPrecio()) ?>€
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Propietario:</strong> <?= htmlspecialchars($imagen->getPropietario()) ?>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Fecha:</strong> <?= htmlspecialchars($imagen->getFecha()) ?>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="card-footer text-center">
+                                    <a href="imagenDetalles?id=<?= $imagen->getId() ?>" class="btn btn-primary">Ver más</a>
+                                    <a href="#" class="btn btn-success like-btn" data-id="<?= $imagen->getId() ?>">Like</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php else: ?>
+                <p class="text-center text-muted">No hay imágenes disponibles en la galería.</p>
+            <?php endif; ?>
+        </div>
     </div>
-    <!-- End Banner Hero -->
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.like-btn').forEach(button => {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    let id = this.getAttribute('data-id');
 
-    <!-- Start Categories of The Month -->
-    <section class="container py-5">
-        <div class="row text-center pt-3">
-            <div class="col-lg-6 m-auto">
-                <h1 class="h1">Categories of The Month</h1>
-                <p>
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="../../public/img/category_img_01.jpg" class="rounded-circle img-fluid border"></a>
-                <h5 class="text-center mt-3 mb-3">Watches</h5>
-                <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
-            </div>
-            <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="../../public/img/category_img_02.jpg" class="rounded-circle img-fluid border"></a>
-                <h2 class="h5 text-center mt-3 mb-3">Shoes</h2>
-                <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
-            </div>
-            <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="../../public/img/category_img_03.jpg" class="rounded-circle img-fluid border"></a>
-                <h2 class="h5 text-center mt-3 mb-3">Accessories</h2>
-                <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
-            </div>
-        </div>
-    </section>
-    <!-- End Categories of The Month -->
+                    fetch(window.location.href, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: 'idLike=' + id
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                location.reload();
+                            } else {
+                                alert(data.message);
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                });
+            });
+        });
+    </script>
 
+    <?php require_once __DIR__ . "/../controllers/fin.part.php"; ?>
 
-    <!-- Start Featured Product -->
-    <section class="bg-light">
-        <div class="container py-5">
-            <div class="row text-center py-3">
-                <div class="col-lg-6 m-auto">
-                    <h1 class="h1">Featured Product</h1>
-                    <p>
-                        Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                        Excepteur sint occaecat cupidatat non proident.
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img src="../../public/img/feature_prod_01.jpg" class="card-img-top" alt="...">
-                        </a>
-                        <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                </li>
-                                <li class="text-muted text-right">$240.00</li>
-                            </ul>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Gym Weight</a>
-                            <p class="card-text">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt in culpa qui officia
-                                deserunt.
-                            </p>
-                            <p class="text-muted">Reviews (24)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img src="../../public/img/feature_prod_02.jpg" class="card-img-top" alt="...">
-                        </a>
-                        <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                </li>
-                                <li class="text-muted text-right">$480.00</li>
-                            </ul>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Cloud Nike Shoes</a>
-                            <p class="card-text">
-                                Aenean gravida dignissim finibus. Nullam ipsum diam, posuere vitae pharetra sed, commodo
-                                ullamcorper.
-                            </p>
-                            <p class="text-muted">Reviews (48)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img src="../../public/img/feature_prod_03.jpg" class="card-img-top" alt="...">
-                        </a>
-                        <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                </li>
-                                <li class="text-muted text-right">$360.00</li>
-                            </ul>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Summer Addides
-                                Shoes</a>
-                            <p class="card-text">
-                                Curabitur ac mi sit amet diam luctus porta. Phasellus pulvinar sagittis diam, et
-                                scelerisque ipsum lobortis nec.
-                            </p>
-                            <p class="text-muted">Reviews (74)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End Featured Product -->
-
-
-    <!-- Start Footer -->
-    <?php
-    require_once __DIR__ . "/../controllers/fin.part.php";
-    ?>
-    <!-- End Footer -->
 </body>
 
 </html>

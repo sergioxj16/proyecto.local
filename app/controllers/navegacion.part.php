@@ -25,21 +25,11 @@ use sergio\app\utils\Utils;
                     <li class="nav-item <?= Utils::esOpcionMenuActiva('') ? 'active' : ''; ?>">
                         <a class="nav-link" href="/">Home</a>
                     </li>
-
-                    <li class="nav-item <?= Utils::esOpcionMenuActiva('shop') ? 'active' : ''; ?>">
-                        <a class="nav-link" href="shop">Tienda</a>
-                    </li>
                     <li class="nav-item <?= Utils::esOpcionMenuActiva('agregarProducto') ? 'active' : ''; ?>">
                         <a class="nav-link" href="agregarProducto">Añadir</a>
                     </li>
                     <li class="nav-item <?= Utils::esOpcionMenuActiva('mostrarGaleria') ? 'active' : ''; ?>">
-                        <a class="nav-link" href="mostrarGaleria">Galeria</a>
-                    </li>
-                    <li class="nav-item <?= Utils::esOpcionMenuActiva('contact') ? 'active' : ''; ?>">
-                        <a class="nav-link" href="contact">Contact</a>
-                    </li>
-                    <li class="nav-item <?= Utils::esOpcionMenuActiva('about') ? 'active' : ''; ?>">
-                        <a class="nav-link" href="about">About</a>
+                        <a class="nav-link" href="mostrarGaleria">Mis productos</a>
                     </li>
                 </ul>
             </div>

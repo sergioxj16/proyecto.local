@@ -1,7 +1,7 @@
 <?php
 namespace sergio\app\utils;
-
 use sergio\app\exceptions\FileException;
+use sergio\app\entity\Imagen;
 /**
  * @param string $fileName
  * @param array $arrTypes

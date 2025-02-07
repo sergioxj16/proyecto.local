@@ -4,6 +4,8 @@ use sergio\core\Request;
 use sergio\core\App;
 use sergio\Core\Router;
 
+use function sergio\app\getConfig;
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 // Crea el objeto Router
@@ -14,7 +16,7 @@ require_once __DIR__ . '/app/config.php';
 
 
 // Configuración
-$config = require_once __DIR__ . '/app/config.php';
+$config = getConfig();
 App::bind('config', $config);
 
 // Llama a la ruta correspondiente

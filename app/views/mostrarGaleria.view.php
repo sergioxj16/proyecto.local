@@ -79,7 +79,7 @@
                         <button type="submit" class="btn btn-primary me-md-2">
                             <i class="bi bi-funnel"></i> Filtrar
                         </button>
-                        <a href="mostrarGaleria.php" class="btn btn-secondary">
+                        <a href="mostrarGaleria" class="btn btn-secondary">
                             <i class="bi bi-arrow-counterclockwise"></i> Limpiar
                         </a>
                     </div>
@@ -88,8 +88,8 @@
         </form>
 
         <div class="mb-4">
-            <a href="mostrarGaleria.php?ordenar=precio" class="btn btn-success me-2">Ordenar por Precio</a>
-            <a href="mostrarGaleria.php?ordenar=likes" class="btn btn-warning">Ordenar por Likes</a>
+            <a href="mostrarGaleria?ordenar=precio" class="btn btn-success me-2">Ordenar por Precio</a>
+            <a href="mostrarGaleria?ordenar=likes" class="btn btn-warning">Ordenar por Likes</a>
         </div>
 
         <?php if (!empty($errores)): ?>
@@ -141,10 +141,12 @@
                                 </div>
 
                                 <div class="card-footer text-center">
-                                    <a href="#" class="btn btn-primary btn-sm">
-                                        <i class="bi bi-eye"></i> Ver más
+                                    <a href="imagenDetalles?id=<?= $imagen->getId() ?>" class="btn btn-primary">Ver más</a>
+
+                                    <a href="#" class="btn btn-success btn-sm">
+                                        <i class="bi bi-eye"></i> Editar
                                     </a>
-                                    <a href="mostrarGaleria.php?borrar=<?= $imagen->getId() ?>" class="btn btn-danger btn-sm">
+                                    <a href="mostrarGaleria?borrar=<?= $imagen->getId() ?>" class="btn btn-danger btn-sm">
                                         <i class="bi bi-trash"></i> Borrar
                                     </a>
                                 </div>

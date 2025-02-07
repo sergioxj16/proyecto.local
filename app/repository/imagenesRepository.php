@@ -66,8 +66,32 @@ class ImagenesRepository extends QueryBuilder
         $stmt = $this->connection->prepare("SELECT * FROM imagenes WHERE id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetchObject('Imagen');
+        return $stmt->fetchObject($this->classEntity);
     }
+
+    public function findByIdDetails($id): ?Imagen
+    {
+        $stmt = $this->connection->prepare("SELECT * FROM imagenes WHERE id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($data) {
+            return new Imagen(
+                $data['imagen'],
+                $data['nombre'],
+                $data['descripcion'],
+                $data['categoria'],
+                $data['propietario'],
+                $data['numLikes'],
+                $data['precio'],
+                $data['fecha']
+            );
+        }
+
+        return null;
+    }
+
 
     public function delete($id)
     {
@@ -75,5 +99,14 @@ class ImagenesRepository extends QueryBuilder
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
+
+    public function darLike($id): bool
+    {
+        $stmt = $this->connection->prepare("UPDATE imagenes SET numLikes = numLikes + 1 WHERE id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
+
 
 }

@@ -26,15 +26,6 @@ if (isset($_GET['borrar'])) {
         if ($imagen) {
             $rutaImagen = Imagen::RUTA_IMAGENES_GALERIA . $imagen->getImagen(); // Ajustamos la ruta
 
-            // Verificamos si el archivo existe antes de intentar borrarlo
-            if (file_exists($rutaImagen)) {
-                if (!unlink($rutaImagen)) { // Intentamos eliminar el archivo
-                    throw new Exception("Error al eliminar el archivo de imagen.");
-                }
-            } else {
-                throw new Exception("El archivo de imagen no existe.");
-            }
-
             // Eliminamos la entrada en la base de datos
             if ($imagenRepo->delete($idImagen)) {
                 $mensaje = 'La imagen ha sido eliminada correctamente.';
