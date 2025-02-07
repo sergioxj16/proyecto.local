@@ -31,6 +31,12 @@ use sergio\app\utils\Utils;
                     <li class="nav-item <?= Utils::esOpcionMenuActiva('mostrarGaleria') ? 'active' : ''; ?>">
                         <a class="nav-link" href="mostrarGaleria">Mis productos</a>
                     </li>
+                    <li class="nav-item <?= Utils::esOpcionMenuActiva('perfil') ? 'active' : ''; ?>">
+                        <a class="nav-link" href="perfil">Mi perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout">Logout</a>
+                    </li>
                 </ul>
             </div>
             <div class="navbar align-self-center d-flex">

@@ -18,7 +18,15 @@ require_once __DIR__ . "/../controllers/inicio.part.php";
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title text-center mb-4">Iniciar sesión</h4>
-                        <form action="login_process.php" method="POST">
+
+                        <!-- Mostrar mensaje de error -->
+                        <?php if (!empty($error)) : ?>
+                            <div class="alert alert-danger">
+                                <?php echo $error; ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <form action="login" method="POST">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Correo electrónico</label>
                                 <input type="email" class="form-control" id="email" name="email" required>
@@ -45,7 +53,6 @@ require_once __DIR__ . "/../controllers/inicio.part.php";
     require_once __DIR__ . "/../controllers/fin.part.php";
     ?>
     <!-- End Footer -->
-
 
 </body>
 

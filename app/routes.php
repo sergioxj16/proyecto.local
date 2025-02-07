@@ -8,5 +8,7 @@ $router->define([
     'imagenDetalles' => 'app/controllers/imagenDetalles.php',
     'login' => 'app/controllers/login.php',
     'register' => 'app/controllers/register.php',
-    'editarProducto' => 'app/controllers/editarProducto.php'
+    'editarProducto' => 'app/controllers/editarProducto.php',
+    'logout' => 'app/controllers/logout.php',
+    'perfil' => 'app/controllers/perfil.php'
 ]);

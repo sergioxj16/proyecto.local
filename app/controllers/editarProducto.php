@@ -3,6 +3,14 @@ use sergio\app\repository\ImagenesRepository;
 use sergio\app\exceptions\QueryException;
 use sergio\core\App;
 
+Session_start();
+
+if (!isset($_SESSION['usuario'])) {
+    header('Location: login'); // Redirigir al login si no está autenticado
+    exit;
+}
+
+
 $errores = [];
 $exito = false;
 $imagen = null;

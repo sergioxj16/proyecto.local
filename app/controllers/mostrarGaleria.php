@@ -5,6 +5,12 @@ use sergio\app\entity\Imagen;
 use sergio\core\App;
 use sergio\app\repository\ImagenesRepository;
 use function sergio\app\getConfig;
+Session_start();
+
+if (!isset($_SESSION['usuario'])) {
+    header('Location: login'); // Redirigir al login si no está autenticado
+    exit;
+}
 
 $errores = [];
 $mensaje = '';

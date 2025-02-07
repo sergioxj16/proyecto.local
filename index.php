@@ -14,7 +14,6 @@ $router = new Router();
 // Cargar las rutas
 require_once __DIR__ . '/app/config.php';
 
-
 // Configuración
 $config = getConfig();
 App::bind('config', $config);

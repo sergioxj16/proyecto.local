@@ -5,6 +5,7 @@ use sergio\app\exceptions\QueryException;
 use sergio\app\entity\User;
 use PDOException;
 use sergio\core\App;
+use PDO;
 
 class UserRepository
 {
@@ -44,4 +45,51 @@ class UserRepository
         }
     }
 
+    public function findAll(): array {
+        $conexion = App::getConnection();
+        $stmt = $conexion->prepare("SELECT id, correo, nombre, apellido, password, rol FROM usuarios");
+        $stmt->execute();
+        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $usuarios = [];
+        foreach ($resultado as $row) {
+            $usuarios[] = new User(
+                $row['correo'], 
+                $row['nombre'], 
+                $row['apellido'], 
+                $row['password'], 
+                $row['rol'], 
+                $row['id']
+            );
+        }
+
+        return $usuarios;
+    }
+
+    public function getUsuarioActual(): ?User
+    {
+        if (isset($_SESSION['usuario']['correo'])) {
+            try {
+                $query = "SELECT id, correo, nombre, apellido, password, rol FROM usuarios WHERE correo = :correo";
+                $stmt = $this->conexion->prepare($query);
+                $stmt->execute([':correo' => $_SESSION['usuario']['correo']]);
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($row) {
+                    return new User(
+                        $row['correo'],
+                        $row['nombre'],
+                        $row['apellido'],
+                        $row['password'],
+                        $row['rol'],
+                        $row['id']
+                    );
+                }
+            } catch (PDOException $e) {
+                throw new QueryException("Error al obtener el usuario actual: " . $e->getMessage());
+            }
+        }
+
+        return null;
+    }
 }
