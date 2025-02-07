@@ -143,7 +143,7 @@
                                 <div class="card-footer text-center">
                                     <a href="imagenDetalles?id=<?= $imagen->getId() ?>" class="btn btn-primary">Ver más</a>
 
-                                    <a href="#" class="btn btn-success btn-sm">
+                                    <a href="editarProducto?id=<?= $imagen->getId() ?>" class="btn btn-success btn-sm">
                                         <i class="bi bi-eye"></i> Editar
                                     </a>
                                     <a href="mostrarGaleria?borrar=<?= $imagen->getId() ?>" class="btn btn-danger btn-sm">
